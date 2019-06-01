@@ -6,17 +6,18 @@
 //  Copyright © 2019 Фёдор Морев. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "FirstScreenViewController.h"
 
-@interface ViewController ()
+@interface FirstScreenViewController ()
 
 @end
 
-@implementation ViewController
+@implementation FirstScreenViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.title = @"VC";
 }
 
 
