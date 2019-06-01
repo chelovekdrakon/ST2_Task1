@@ -19,7 +19,7 @@
     
     self.title = @"Select Item";
     
-    UIBarButtonItem *barButtonClose = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(handleClosePress:)];
+    UIBarButtonItem *barButtonClose = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(handleClosePress:)];
     barButtonClose.tintColor = [UIColor redColor];
     self.navigationItem.rightBarButtonItem = barButtonClose;
     
