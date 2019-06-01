@@ -17,11 +17,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // self.navigationItem.backBarButtonItem hidesBackButton
+    self.title = @"Select Item";
     
     UIBarButtonItem *barButtonClose = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(handleClosePress:)];
     barButtonClose.tintColor = [UIColor redColor];
     self.navigationItem.rightBarButtonItem = barButtonClose;
+    
+    self.navigationItem.hidesBackButton = YES;
 }
 
 - (void)handleClosePress:(id)sender {
