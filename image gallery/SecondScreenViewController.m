@@ -16,7 +16,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    // self.navigationItem.backBarButtonItem hidesBackButton
+    
+    UIBarButtonItem *barButtonClose = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(handleClosePress:)];
+    barButtonClose.tintColor = [UIColor redColor];
+    self.navigationItem.rightBarButtonItem = barButtonClose;
+}
+
+- (void)handleClosePress:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 /*

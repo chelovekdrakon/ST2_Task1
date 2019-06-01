@@ -22,10 +22,8 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     FirstScreenViewController *vc = [FirstScreenViewController new];
-    //    vc.view.backgroundColor = [UIColor greenColor];
     
     MainNavigationController *nc = [[MainNavigationController alloc] initWithRootViewController:vc];
-    
     //    NSMutableArray<UINavigationController *> *navCotrollers = [NSMutableArray new];
     
     [self.window setRootViewController:nc];

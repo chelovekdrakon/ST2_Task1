@@ -7,6 +7,7 @@
 //
 
 #import "FirstScreenViewController.h"
+#import "SecondScreenViewController.h"
 
 @interface FirstScreenViewController ()
 
@@ -17,8 +18,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"VC";
+    self.title = @"Image Gallery";
+    
+    UIBarButtonItem *barButtonAdd = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(handleAddPress:)];
+    barButtonAdd.tintColor = [UIColor redColor];
+    self.navigationItem.rightBarButtonItem = barButtonAdd;
 }
 
+- (void)handleAddPress:(id)sender {
+    SecondScreenViewController *vc = [[SecondScreenViewController alloc] init];
+    vc.view.backgroundColor = [UIColor whiteColor];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 @end
