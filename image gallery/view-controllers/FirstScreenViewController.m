@@ -23,6 +23,21 @@
     UIBarButtonItem *barButtonAdd = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(handleAddPress:)];
     barButtonAdd.tintColor = [UIColor redColor];
     self.navigationItem.rightBarButtonItem = barButtonAdd;
+    
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+    CGSize controllerSize = self.view.frame.size;
+    
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, screenSize.width, screenSize.height)];
+    scrollView.contentSize = screenSize;
+    
+//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(10, 10, 10, 1000)];
+//    view.backgroundColor = [UIColor yellowColor];
+//    [scrollView addSubview:view];
+    
+    [self.view addSubview:scrollView];
+    _mainScrollView = scrollView;
+    
+    NSLog(@"hello");
 }
 
 - (void)handleAddPress:(id)sender {

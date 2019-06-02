@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface FirstScreenViewController : UIViewController
-
-
+@property(weak, nonatomic) UIScrollView* mainScrollView;
 @end
 
