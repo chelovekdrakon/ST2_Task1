@@ -10,6 +10,8 @@
 
 @interface SecondScreenViewController ()
 @property(nonatomic, strong) NSURL *imageUrl;
+@property(nonatomic, strong) UIActivityIndicatorView *loader;
+// @property(nonatomic, assign) int imagesCount;
 @end
 
 @implementation SecondScreenViewController
@@ -18,6 +20,7 @@
     [super viewDidLoad];
     
     self.title = @"Select Item";
+    // _imagesCount = 0;
 
     CGSize controllerSize = self.view.frame.size;
     NSString *urlStr = [NSString stringWithFormat:@"https://picsum.photos/%i/%i", (int)controllerSize.width, 100];
@@ -32,6 +35,25 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    UILoader *loader = [[UILoader alloc] initWithHandlerBlock:^void () {
+        [self generateImages];
+        [self.loader stopAnimating];
+    }];
+    loader.color = [UIColor grayColor];
+//    UIActivityIndicatorView *loader = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+//
+    loader.center = self.view.center;
+    _loader = loader;
+    [loader startAnimating];
+
+    [self.view addSubview:loader];
+}
+
+- (void)viewDidLayoutSubviews {
+
+}
+
+-(void)generateImages {
     for (int index = 0; index <= 30; index++) {
         UIView *view = [self generateImageViewForIndex:index];
         [self.view addSubview:view];

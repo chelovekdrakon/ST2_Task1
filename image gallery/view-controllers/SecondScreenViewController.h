@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UILoader.h"
 
-@interface SecondScreenViewController : UIViewController
+@interface SecondScreenViewController : UIViewController 
 
 @end
