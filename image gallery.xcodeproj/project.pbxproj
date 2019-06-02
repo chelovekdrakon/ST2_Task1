@@ -45,6 +45,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		321C7DF522A409EC00EC1F9A /* view-controllers */ = {
+			isa = PBXGroup;
+			children = (
+				32EFD72F22A2DFDA008D7801 /* MainNavigationController.h */,
+				32EFD73022A2DFDA008D7801 /* MainNavigationController.m */,
+				32EFD71122A2D2B9008D7801 /* FirstScreenViewController.h */,
+				32EFD71222A2D2B9008D7801 /* FirstScreenViewController.m */,
+				32EFD73222A2E057008D7801 /* SecondScreenViewController.h */,
+				32EFD73322A2E057008D7801 /* SecondScreenViewController.m */,
+			);
+			path = "view-controllers";
+			sourceTree = "<group>";
+		};
 		32EFD70222A2D2B9008D7801 = {
 			isa = PBXGroup;
 			children = (
@@ -64,14 +77,9 @@
 		32EFD70D22A2D2B9008D7801 /* image gallery */ = {
 			isa = PBXGroup;
 			children = (
+				321C7DF522A409EC00EC1F9A /* view-controllers */,
 				32EFD70E22A2D2B9008D7801 /* AppDelegate.h */,
 				32EFD70F22A2D2B9008D7801 /* AppDelegate.m */,
-				32EFD72F22A2DFDA008D7801 /* MainNavigationController.h */,
-				32EFD73022A2DFDA008D7801 /* MainNavigationController.m */,
-				32EFD71122A2D2B9008D7801 /* FirstScreenViewController.h */,
-				32EFD71222A2D2B9008D7801 /* FirstScreenViewController.m */,
-				32EFD73222A2E057008D7801 /* SecondScreenViewController.h */,
-				32EFD73322A2E057008D7801 /* SecondScreenViewController.m */,
 				32EFD71422A2D2B9008D7801 /* Main.storyboard */,
 				32EFD71722A2D2BA008D7801 /* Assets.xcassets */,
 				32EFD71922A2D2BA008D7801 /* LaunchScreen.storyboard */,

@@ -22,15 +22,10 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     FirstScreenViewController *vc = [FirstScreenViewController new];
-    
     MainNavigationController *nc = [[MainNavigationController alloc] initWithRootViewController:vc];
-    //    NSMutableArray<UINavigationController *> *navCotrollers = [NSMutableArray new];
     
     [self.window setRootViewController:nc];
-    
     [self.window makeKeyAndVisible];
-    
-    return YES;
     
     return YES;
 }
