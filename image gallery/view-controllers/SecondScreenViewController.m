@@ -18,8 +18,7 @@
     [super viewDidLoad];
     
     self.title = @"Select Item";
-    
-//    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+
     CGSize controllerSize = self.view.frame.size;
     NSString *urlStr = [NSString stringWithFormat:@"https://picsum.photos/%i/%i", (int)controllerSize.width, 100];
     _imageUrl = [NSURL URLWithString:urlStr];
@@ -30,18 +29,38 @@
     self.navigationItem.rightBarButtonItem = barButtonClose;
     
     self.navigationItem.hidesBackButton = YES;
-    
-    for (int i = 0; i <= 30; i++) {
-        NSData *imageData = [NSData dataWithContentsOfURL:_imageUrl];
-        UIImage *image = [[UIImage alloc] initWithData:imageData];
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, i * image.size.height, image.size.width, image.size.height)];
-        imageView.image = image;
-        [self.view addSubview:imageView];
-        NSLog(@"");
-    }
-    
-    
 }
+
+- (void)viewDidAppear:(BOOL)animated {
+    for (int index = 0; index <= 30; index++) {
+        UIView *view = [self generateImageViewForIndex:index];
+        [self.view addSubview:view];
+    }
+}
+
+- (UIView *)generateImageViewForIndex:(int)index {
+    NSData *imageData = [NSData dataWithContentsOfURL:_imageUrl];
+    UIImage *image = [[UIImage alloc] initWithData:imageData];
+    UIImageView *imageView = [[UIImageView alloc]
+                              initWithFrame:CGRectMake(0, index * image.size.height, image.size.width, image.size.height)];
+    imageView.image = image;
+    
+    UILabel *label = [UILabel new];
+    label.text = [_imageUrl absoluteString];
+    [label sizeToFit];
+    label.frame = CGRectMake(
+                             (image.size.width / 2) - (label.frame.size.width / 2),
+                             (image.size.height / 2) - (label.frame.size.height / 2),
+                             label.frame.size.width,
+                             label.frame.size.height
+                 );
+    label.textColor = [UIColor whiteColor];
+    
+    [imageView addSubview:label];
+    
+    return imageView;
+}
+    
 
 - (void)handleClosePress:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
