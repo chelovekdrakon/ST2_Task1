@@ -54,13 +54,16 @@
                              label.frame.size.width,
                              label.frame.size.height
                  );
-    label.textColor = [UIColor whiteColor];
+    label.textColor = [self randomColor];
     
     [imageView addSubview:label];
     
     return imageView;
 }
-    
+
+- (UIColor *)randomColor {
+    return [UIColor colorWithHue:drand48() saturation:1.0 brightness:1.0 alpha:1.0];
+}
 
 - (void)handleClosePress:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
