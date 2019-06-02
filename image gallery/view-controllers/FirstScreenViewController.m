@@ -44,6 +44,10 @@
     SecondScreenViewController *vc = [[SecondScreenViewController alloc] init];
     vc.view.backgroundColor = [UIColor whiteColor];
     
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+//    DetailViewController *detailViewController = [storyboard instantiateViewControllerWithIdentifier:@"DetailViewController"];
+//    [self.navigationController pushViewController:detailViewController animated:YES];
+    
     [self.navigationController pushViewController:vc animated:YES];
 }
 
