@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SecondScreenViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
-
+- (id)initWithHandler:(void (^)(UIImageView *))onImagePress;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -9,6 +9,7 @@
 #import "SecondScreenViewController.h"
 
 @interface SecondScreenViewController ()
+@property (nonatomic, copy) void (^onImagePress)(UIImageView *);
 @property(nonatomic, strong) NSURL *imageUrl;
 @property(nonatomic, strong) UIActivityIndicatorView *loader;
 @property(nonatomic, assign) int imageHeight;
@@ -16,6 +17,14 @@
 @end
 
 @implementation SecondScreenViewController
+
+- (id)initWithHandler:(void (^)(UIImageView *))onImagePress {
+    self = [super init];
+    if (self) {
+        _onImagePress = onImagePress;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -64,12 +73,16 @@
 
 -(void)generateImages {
     for (int index = 0; index < _imagesAmount; index++) {
-        UIView *view = [self generateImageViewForIndex:index];
+        UIImageView *view = [self generateImageViewForIndex:index];
         [self.mainScrollView addSubview:view];
     }
 }
 
-- (UIView *)generateImageViewForIndex:(int)index {
+- (void)handleImagePress:(id)sender {
+    self.onImagePress((UIImageView *)[sender view]);
+}
+
+- (UIImageView *)generateImageViewForIndex:(int)index {
     NSData *imageData = [NSData dataWithContentsOfURL:_imageUrl];
     UIImage *image = [[UIImage alloc] initWithData:imageData];
     UIImageView *imageView = [[UIImageView alloc]
@@ -88,6 +101,14 @@
     label.textColor = [self randomColor];
     
     [imageView addSubview:label];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]
+                                          initWithTarget:self
+                                          action:@selector(handleImagePress:)
+                                          ];
+    imageView.userInteractionEnabled = YES;
+    [imageView setTag:index];
+    [imageView addGestureRecognizer:tapGesture];
     
     return imageView;
 }

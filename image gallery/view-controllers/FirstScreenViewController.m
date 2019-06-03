@@ -42,7 +42,11 @@
 }
 
 - (void)handleAddPress:(id)sender {
-    SecondScreenViewController *vc = [[SecondScreenViewController alloc] init];
+    SecondScreenViewController *vc = [[SecondScreenViewController alloc] initWithHandler:^void (UIImageView *imageView) {
+        [self.mainScrollView addSubview:imageView];
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
+    
     vc.view.backgroundColor = [UIColor whiteColor];
     
     [self.navigationController pushViewController:vc animated:YES];
