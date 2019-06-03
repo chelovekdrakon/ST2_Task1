@@ -21,7 +21,7 @@
     
     self.title = @"Select Item";
     // _imagesCount = 0;
-
+    
     CGSize controllerSize = self.view.frame.size;
     NSString *urlStr = [NSString stringWithFormat:@"https://picsum.photos/%i/%i", (int)controllerSize.width, 100];
     _imageUrl = [NSURL URLWithString:urlStr];
@@ -40,17 +40,17 @@
         [self.loader stopAnimating];
     }];
     loader.color = [UIColor grayColor];
-//    UIActivityIndicatorView *loader = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-//
+    //    UIActivityIndicatorView *loader = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    //
     loader.center = self.view.center;
     _loader = loader;
     [loader startAnimating];
-
+    
     [self.view addSubview:loader];
 }
 
 - (void)viewDidLayoutSubviews {
-
+    
 }
 
 -(void)generateImages {
@@ -75,7 +75,7 @@
                              (image.size.height / 2) - (label.frame.size.height / 2),
                              label.frame.size.width,
                              label.frame.size.height
-                 );
+                             );
     label.textColor = [self randomColor];
     
     [imageView addSubview:label];
@@ -92,13 +92,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
