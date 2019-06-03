@@ -11,7 +11,8 @@
 @interface SecondScreenViewController ()
 @property(nonatomic, strong) NSURL *imageUrl;
 @property(nonatomic, strong) UIActivityIndicatorView *loader;
-// @property(nonatomic, assign) int imagesCount;
+@property(nonatomic, assign) int imageHeight;
+@property(nonatomic, assign) int imagesAmount;
 @end
 
 @implementation SecondScreenViewController
@@ -19,13 +20,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _imageHeight = 100;
+    _imagesAmount = 30;
     self.title = @"Select Item";
-    // _imagesCount = 0;
-    
-    CGSize controllerSize = self.view.frame.size;
-    NSString *urlStr = [NSString stringWithFormat:@"https://picsum.photos/%i/%i", (int)controllerSize.width, 100];
-    _imageUrl = [NSURL URLWithString:urlStr];
-    
     
     UIBarButtonItem *barButtonClose = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(handleClosePress:)];
     barButtonClose.tintColor = [UIColor redColor];
@@ -35,18 +32,30 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    UILoader *loader = [[UILoader alloc] initWithHandlerBlock:^void () {
-        [self generateImages];
-        [self.loader stopAnimating];
-    }];
-    loader.color = [UIColor grayColor];
-    //    UIActivityIndicatorView *loader = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    //
-    loader.center = self.view.center;
-    _loader = loader;
-    [loader startAnimating];
+//    UILoader *loader = [[UILoader alloc] initWithHandlerBlock:^void () {
+//        [self generateImages];
+//        [self.loader stopAnimating];
+//    }];
+//    loader.color = [UIColor grayColor];
+//    loader.center = self.view.center;
+//    _loader = loader;
+//    [loader startAnimating];
+//
+//    [self.view addSubview:loader];
     
-    [self.view addSubview:loader];
+    CGSize controllerSize = self.view.frame.size;
+    CGSize navBarSize = self.navigationController.navigationBar.frame.size;
+    
+    NSString *urlStr = [NSString stringWithFormat:@"https://picsum.photos/%i/%i", (int)controllerSize.width, _imageHeight];
+    _imageUrl = [NSURL URLWithString:urlStr];
+    
+    self.mainScrollView.contentSize = CGSizeMake(
+                                                 controllerSize.width,
+                                                 (_imagesAmount * _imageHeight) + navBarSize.height
+                                                );
+    self.mainScrollView.userInteractionEnabled = YES;
+    
+    [self generateImages];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -54,9 +63,9 @@
 }
 
 -(void)generateImages {
-    for (int index = 0; index <= 30; index++) {
+    for (int index = 0; index < _imagesAmount; index++) {
         UIView *view = [self generateImageViewForIndex:index];
-        [self.view addSubview:view];
+        [self.mainScrollView addSubview:view];
     }
 }
 
@@ -90,15 +99,5 @@
 - (void)handleClosePress:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end
