@@ -24,6 +24,7 @@
 }
 
 - (void)didMoveToSuperview {
+    [super didMoveToSuperview];
     self.handler();
 }
 

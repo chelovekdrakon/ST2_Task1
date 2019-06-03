@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3206CC4822A42D6000BB66D1 /* SecondScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3206CC4722A42D6000BB66D1 /* SecondScreen.storyboard */; };
 		3206CC4B22A44E5F00BB66D1 /* UILoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3206CC4A22A44E5F00BB66D1 /* UILoader.m */; };
 		32EFD71022A2D2B9008D7801 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 32EFD70F22A2D2B9008D7801 /* AppDelegate.m */; };
 		32EFD71322A2D2B9008D7801 /* FirstScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32EFD71222A2D2B9008D7801 /* FirstScreenViewController.m */; };
@@ -18,7 +17,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3206CC4722A42D6000BB66D1 /* SecondScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SecondScreen.storyboard; sourceTree = "<group>"; };
 		3206CC4922A44E5F00BB66D1 /* UILoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UILoader.h; sourceTree = "<group>"; };
 		3206CC4A22A44E5F00BB66D1 /* UILoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UILoader.m; sourceTree = "<group>"; };
 		32EFD70B22A2D2B9008D7801 /* image gallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "image gallery.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,7 +88,6 @@
 				3206CC4C22A44E6400BB66D1 /* components */,
 				321C7DF522A409EC00EC1F9A /* view-controllers */,
 				32EFD70E22A2D2B9008D7801 /* AppDelegate.h */,
-				3206CC4722A42D6000BB66D1 /* SecondScreen.storyboard */,
 				32EFD70F22A2D2B9008D7801 /* AppDelegate.m */,
 				32EFD71722A2D2BA008D7801 /* Assets.xcassets */,
 				32EFD71C22A2D2BA008D7801 /* Info.plist */,
@@ -156,7 +153,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3206CC4822A42D6000BB66D1 /* SecondScreen.storyboard in Resources */,
 				32EFD71822A2D2BA008D7801 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
