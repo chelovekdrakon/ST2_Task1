@@ -11,6 +11,12 @@
 
 @interface CustomView : UIImageView
 @property(nonatomic, strong) NSString *imageDescription;
-- (id)initWithImage:(UIImage *)image andDescription:(NSString *)description;
+@property(weak, nonatomic) id delegate;
+
+- (id)initWithImage:(UIImage *)image description:(NSString *)description;
 @end
 
+@protocol CustomViewDelegate
+@required
+- (void)handleCustomViewMovement:(CustomView *)view;
+@end

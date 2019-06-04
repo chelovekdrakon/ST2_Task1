@@ -10,14 +10,30 @@
 
 @implementation CustomView
 
-- (id)initWithImage:(UIImage *)image andDescription:(NSString *)description {
+- (id)initWithImage:(UIImage *)image description:(NSString *)description {
     self = [super initWithImage:(UIImage *)image];
     
     if (self) {
         _imageDescription = description;
+        
+        UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleMove:)];
+        [panRecognizer setMinimumNumberOfTouches:1];
+        [panRecognizer setMaximumNumberOfTouches:1];
+        [self addGestureRecognizer:panRecognizer];
     }
     
     return self;
+}
+
+- (void)handleMove:(UIPanGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        if ([self.delegate respondsToSelector:@selector(handleCustomViewMovement:)]) {
+            [self.delegate handleCustomViewMovement:self];
+        }
+    }
+    
+    
+    
 }
 
 @end

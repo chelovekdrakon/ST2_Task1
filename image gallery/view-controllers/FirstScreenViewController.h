@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomView.h"
 
-@interface FirstScreenViewController : UIViewController
+@interface FirstScreenViewController : UIViewController <CustomViewDelegate>
 @property(weak, nonatomic) UIScrollView* mainScrollView;
+
+- (void)handleCustomViewMovement:(CustomView *)view;
 @end
 

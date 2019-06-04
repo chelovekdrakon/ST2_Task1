@@ -43,19 +43,27 @@
     _mainScrollView = scrollView;
 }
 
+#pragma - handlers
+
 - (void)handleScrollViewPress:(id)sender {
     self.navigationItem.title = @"Image Gallery";
 }
 
 - (void)handleCustomViewPress:(id)sender {
     CustomView *customView = (CustomView *)[sender view];
+    [self.view bringSubviewToFront:customView];
     self.navigationItem.title = customView.imageDescription;
+}
+
+- (void)handleCustomViewMovement:(CustomView *)view {
+    [self.view bringSubviewToFront:view];
 }
 
 - (void)handleAddPress:(id)sender {
       SecondScreenViewController *vc = [[SecondScreenViewController alloc] initWithHandler:^void (CustomImage *imageView) {
           CustomView *customView = [[CustomView alloc]
-                                    initWithImage:imageView.image andDescription:imageView.imageDescription];
+                                    initWithImage:imageView.image description:imageView.imageDescription];
+          customView.delegate = self;
         
           UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]
                                                 initWithTarget:self
