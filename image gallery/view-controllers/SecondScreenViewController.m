@@ -60,10 +60,7 @@ typedef void (^completionHandler)(NSData *data, NSURLResponse *response, NSError
     NSString *urlStr = [NSString stringWithFormat:@"https://picsum.photos/%i/%i", (int)controllerSize.width, _imageHeight];
     _imageURL = [NSURL URLWithString:urlStr];
     
-    self.mainScrollView.contentSize = CGSizeMake(
-                                                 controllerSize.width,
-                                                 (_imagesAmount * _imageHeight) + navBarSize.height
-                                                );
+    self.mainScrollView.contentSize = CGSizeMake(controllerSize.width, (_imagesAmount * _imageHeight) + navBarSize.height);
     self.mainScrollView.userInteractionEnabled = YES;
     
     [self generateImages];

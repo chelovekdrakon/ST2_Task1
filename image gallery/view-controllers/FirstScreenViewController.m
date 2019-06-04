@@ -33,12 +33,18 @@
     scrollView.contentSize = controllerSize;
     scrollView.userInteractionEnabled = YES;
     
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]
+                                          initWithTarget:self
+                                          action:@selector(handleScrollViewPress:)
+                                          ];
+    [scrollView addGestureRecognizer:tapGesture];
+    
     [self.view addSubview:scrollView];
     _mainScrollView = scrollView;
 }
 
 - (void)handleScrollViewPress:(id)sender {
-    
+    self.navigationItem.title = @"Image Gallery";
 }
 
 - (void)handleCustomViewPress:(id)sender {
@@ -48,20 +54,20 @@
 
 - (void)handleAddPress:(id)sender {
       SecondScreenViewController *vc = [[SecondScreenViewController alloc] initWithHandler:^void (CustomImage *imageView) {
-        CustomView *customView = [[CustomView alloc]
-                                  initWithImage:imageView.image andDescription:imageView.imageDescription];
+          CustomView *customView = [[CustomView alloc]
+                                    initWithImage:imageView.image andDescription:imageView.imageDescription];
         
-        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]
-                                              initWithTarget:self
-                                              action:@selector(handleCustomViewPress:)
-                                              ];
-        customView.userInteractionEnabled = YES;
-//        [imageView setTag:index];
-        [customView addGestureRecognizer:tapGesture];
+          UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]
+                                                initWithTarget:self
+                                                action:@selector(handleCustomViewPress:)
+                                                ];
+          customView.userInteractionEnabled = YES;
+          [customView addGestureRecognizer:tapGesture];
+          customView.center = self.mainScrollView.center;
         
-        [self.mainScrollView addSubview:customView];
+          [self.mainScrollView addSubview:customView];
         
-        [self.navigationController popViewControllerAnimated:YES];
+          [self.navigationController popViewControllerAnimated:YES];
     }];
     
     vc.view.backgroundColor = [UIColor whiteColor];
