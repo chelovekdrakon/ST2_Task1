@@ -12,8 +12,6 @@
 #import "CustomImage.h"
 
 
-typedef void (^BlockHandler)(id);
-
 @implementation FirstScreenViewController
 
 - (void)viewDidLoad {
@@ -39,20 +37,19 @@ typedef void (^BlockHandler)(id);
     _mainScrollView = scrollView;
 }
 
+- (void)handleScrollViewPress:(id)sender {
+    
+}
+
 - (void)handleCustomViewPress:(id)sender {
     CustomView *customView = (CustomView *)[sender view];
     self.navigationItem.title = customView.imageDescription;
-    NSLog(@"CustomView have been pressed: %@", customView);
 }
 
 - (void)handleAddPress:(id)sender {
-    BlockHandler onCustomViewPress = ^void(CustomView *customView) {
-        NSLog(@"CustomView have been pressed: %@", customView);
-        self.navigationController.title = customView.imageDescription;
-    };
-    
-    SecondScreenViewController *vc = [[SecondScreenViewController alloc] initWithHandler:^void (CustomImage *imageView) {
-        CustomView *customView = [[CustomView alloc] initWithImage:imageView.image description:imageView.imageDescription andPressHandler:onCustomViewPress];
+      SecondScreenViewController *vc = [[SecondScreenViewController alloc] initWithHandler:^void (CustomImage *imageView) {
+        CustomView *customView = [[CustomView alloc]
+                                  initWithImage:imageView.image andDescription:imageView.imageDescription];
         
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]
                                               initWithTarget:self

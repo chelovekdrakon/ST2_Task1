@@ -8,27 +8,16 @@
 
 #import "CustomView.h"
 
-typedef void (^BlockHandler)(id);
-
-@interface CustomView()
-@property (nonatomic, copy) void (^onPressBlock)(CustomView *);
-@end
-
 @implementation CustomView
 
-- (id)initWithImage:(UIImage *)image description:(NSString *)description andPressHandler:(void (^)(CustomView *))onPressBlock {
+- (id)initWithImage:(UIImage *)image andDescription:(NSString *)description {
     self = [super initWithImage:(UIImage *)image];
     
     if (self) {
-        _onPressBlock = onPressBlock;
         _imageDescription = description;
     }
     
     return self;
-}
-
-- (void)setHandler:(void (^)(CustomView *))onPressBlock {
-    _onPressBlock = onPressBlock;
 }
 
 @end
