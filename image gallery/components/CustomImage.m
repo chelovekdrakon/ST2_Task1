@@ -18,4 +18,18 @@
 }
 */
 
+- (id)initWithUrl:(NSURL *)url {
+    NSData *imageData = [NSData dataWithContentsOfURL:url];
+    UIImage *image = [[UIImage alloc] initWithData:imageData];
+    
+    self = [super init];
+    
+    if (self) {
+        self.image = image;
+        self.imageDescription = [url absoluteString];
+    }
+    
+    return self;
+}
+
 @end
