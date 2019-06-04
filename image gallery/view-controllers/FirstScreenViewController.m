@@ -51,12 +51,12 @@
 
 - (void)handleCustomViewPress:(id)sender {
     CustomView *customView = (CustomView *)[sender view];
-    [self.view bringSubviewToFront:customView];
+    [self.mainScrollView bringSubviewToFront:customView];
     self.navigationItem.title = customView.imageDescription;
 }
 
 - (void)handleCustomViewMovement:(CustomView *)view {
-    [self.view bringSubviewToFront:view];
+    [self.mainScrollView bringSubviewToFront:view];
 }
 
 - (void)handleAddPress:(id)sender {
