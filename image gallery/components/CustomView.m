@@ -30,10 +30,19 @@
         if ([self.delegate respondsToSelector:@selector(handleCustomViewMovement:)]) {
             [self.delegate handleCustomViewMovement:self];
         }
+        
+    } else if (sender.state == UIGestureRecognizerStateChanged) {
+        CGPoint translatedPoint = [sender translationInView:sender.view.superview];
+        self.center = CGPointMake(self.center.x + translatedPoint.x,
+                                  self.center.y + translatedPoint.y);
+        [sender setTranslation:CGPointMake(0, 0) inView:self];
+    } else if (sender.state == UIGestureRecognizerStateEnded) {
+        
     }
     
     
     
+//    NSLog(@"Point, %@", NSStringFromCGPoint(translatedPoint));
 }
 
 @end
