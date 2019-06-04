@@ -32,8 +32,8 @@ typedef void (^completionHandler)(NSData *data, NSURLResponse *response, NSError
     [super viewDidLoad];
     
     _imageHeight = 100;
-    _imagesAmount = 30;
-    self.title = @"Select Item";
+    _imagesAmount = 3;
+    self.navigationItem.title = @"Select Item";
     
     UIBarButtonItem *barButtonClose = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(handleClosePress:)];
     barButtonClose.tintColor = [UIColor redColor];

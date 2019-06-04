@@ -16,15 +16,12 @@ typedef void (^BlockHandler)(id);
 
 @implementation CustomView
 
-- (id)initWithImage:(UIImage *)image {
-    return [[NSString alloc] init];
-}
-
 - (id)initWithImage:(UIImage *)image description:(NSString *)description andPressHandler:(void (^)(CustomView *))onPressBlock {
     self = [super initWithImage:(UIImage *)image];
     
     if (self) {
         _onPressBlock = onPressBlock;
+        _imageDescription = description;
     }
     
     return self;

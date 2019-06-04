@@ -19,7 +19,7 @@ typedef void (^BlockHandler)(id);
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"Image Gallery";
+    self.navigationItem.title = @"Image Gallery";
     
     UIBarButtonItem *barButtonAdd = [[UIBarButtonItem alloc]
                                      initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
@@ -39,20 +39,30 @@ typedef void (^BlockHandler)(id);
     _mainScrollView = scrollView;
 }
 
-- (void)handleCustomViewPress:(CustomView *)customView {
+- (void)handleCustomViewPress:(id)sender {
+    CustomView *customView = (CustomView *)[sender view];
+    self.navigationItem.title = customView.imageDescription;
     NSLog(@"CustomView have been pressed: %@", customView);
 }
 
 - (void)handleAddPress:(id)sender {
     BlockHandler onCustomViewPress = ^void(CustomView *customView) {
         NSLog(@"CustomView have been pressed: %@", customView);
+        self.navigationController.title = customView.imageDescription;
     };
     
     SecondScreenViewController *vc = [[SecondScreenViewController alloc] initWithHandler:^void (CustomImage *imageView) {
-        [self.mainScrollView addSubview:imageView];
+        CustomView *customView = [[CustomView alloc] initWithImage:imageView.image description:imageView.imageDescription andPressHandler:onCustomViewPress];
         
-        CustomView *customView = [[CustomView alloc] initWithImage:imageView.image];
-        [customView setHandler:onCustomViewPress];
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]
+                                              initWithTarget:self
+                                              action:@selector(handleCustomViewPress:)
+                                              ];
+        customView.userInteractionEnabled = YES;
+//        [imageView setTag:index];
+        [customView addGestureRecognizer:tapGesture];
+        
+        [self.mainScrollView addSubview:customView];
         
         [self.navigationController popViewControllerAnimated:YES];
     }];

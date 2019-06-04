@@ -10,6 +10,7 @@
 
 
 @interface CustomView : UIImageView
-
+@property(nonatomic, strong) NSString *imageDescription;
+- (id)initWithImage:(UIImage *)image description:(NSString *)description andPressHandler:(void (^)(CustomView *))onPressBlock;
 @end
 
