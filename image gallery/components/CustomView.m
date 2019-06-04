@@ -8,14 +8,39 @@
 
 #import "CustomView.h"
 
+typedef void (^BlockHandler)(id);
+
+@interface CustomView()
+@property (nonatomic, copy) void (^onPressBlock)(CustomView *);
+@end
+
 @implementation CustomView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (id)initWithImage:(UIImage *)image {
+    return [[NSString alloc] init];
 }
-*/
+
+- (id)initWithImage:(UIImage *)image description:(NSString *)description andPressHandler:(void (^)(CustomView *))onPressBlock {
+    self = [super initWithImage:(UIImage *)image];
+    
+    if (self) {
+        _onPressBlock = onPressBlock;
+    }
+    
+    return self;
+}
+
+- (void)setHandler:(void (^)(CustomView *))onPressBlock {
+    _onPressBlock = onPressBlock;
+}
 
 @end
+
+
+/*
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect {
+ // Drawing code
+ }
+ */

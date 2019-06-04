@@ -10,6 +10,8 @@
 		3206CC4B22A44E5F00BB66D1 /* UILoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3206CC4A22A44E5F00BB66D1 /* UILoader.m */; };
 		321446BE22A515ED0024B78D /* SecondScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 321446BC22A515ED0024B78D /* SecondScreenViewController.m */; };
 		321446BF22A515ED0024B78D /* SecondScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 321446BD22A515ED0024B78D /* SecondScreenViewController.xib */; };
+		322134FB22A6A9AE00BB9915 /* CustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 322134FA22A6A9AE00BB9915 /* CustomView.m */; };
+		322134FE22A6BB1800BB9915 /* CustomImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 322134FD22A6BB1800BB9915 /* CustomImage.m */; };
 		32EFD71022A2D2B9008D7801 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 32EFD70F22A2D2B9008D7801 /* AppDelegate.m */; };
 		32EFD71322A2D2B9008D7801 /* FirstScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32EFD71222A2D2B9008D7801 /* FirstScreenViewController.m */; };
 		32EFD71822A2D2BA008D7801 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32EFD71722A2D2BA008D7801 /* Assets.xcassets */; };
@@ -23,6 +25,10 @@
 		321446BB22A515ED0024B78D /* SecondScreenViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondScreenViewController.h; sourceTree = "<group>"; };
 		321446BC22A515ED0024B78D /* SecondScreenViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondScreenViewController.m; sourceTree = "<group>"; };
 		321446BD22A515ED0024B78D /* SecondScreenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondScreenViewController.xib; sourceTree = "<group>"; };
+		322134F922A6A9AE00BB9915 /* CustomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomView.h; sourceTree = "<group>"; };
+		322134FA22A6A9AE00BB9915 /* CustomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomView.m; sourceTree = "<group>"; };
+		322134FC22A6BB1800BB9915 /* CustomImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomImage.h; sourceTree = "<group>"; };
+		322134FD22A6BB1800BB9915 /* CustomImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomImage.m; sourceTree = "<group>"; };
 		32EFD70B22A2D2B9008D7801 /* image gallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "image gallery.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		32EFD70E22A2D2B9008D7801 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		32EFD70F22A2D2B9008D7801 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -49,6 +55,10 @@
 		3206CC4C22A44E6400BB66D1 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				322134F922A6A9AE00BB9915 /* CustomView.h */,
+				322134FA22A6A9AE00BB9915 /* CustomView.m */,
+				322134FC22A6BB1800BB9915 /* CustomImage.h */,
+				322134FD22A6BB1800BB9915 /* CustomImage.m */,
 				3206CC4922A44E5F00BB66D1 /* UILoader.h */,
 				3206CC4A22A44E5F00BB66D1 /* UILoader.m */,
 			);
@@ -172,7 +182,9 @@
 				32EFD71322A2D2B9008D7801 /* FirstScreenViewController.m in Sources */,
 				32EFD71E22A2D2BA008D7801 /* main.m in Sources */,
 				32EFD73122A2DFDA008D7801 /* MainNavigationController.m in Sources */,
+				322134FB22A6A9AE00BB9915 /* CustomView.m in Sources */,
 				321446BE22A515ED0024B78D /* SecondScreenViewController.m in Sources */,
+				322134FE22A6BB1800BB9915 /* CustomImage.m in Sources */,
 				32EFD71022A2D2B9008D7801 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

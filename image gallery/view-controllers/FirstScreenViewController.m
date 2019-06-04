@@ -8,10 +8,11 @@
 
 #import "FirstScreenViewController.h"
 #import "SecondScreenViewController.h"
+#import "CustomView.h"
+#import "CustomImage.h"
 
-@interface FirstScreenViewController ()
 
-@end
+typedef void (^BlockHandler)(id);
 
 @implementation FirstScreenViewController
 
@@ -27,7 +28,6 @@
     barButtonAdd.tintColor = [UIColor redColor];
     self.navigationItem.rightBarButtonItem = barButtonAdd;
     
-//    CGSize screenSize = [UIScreen mainScreen].bounds.size;
     CGSize controllerSize = self.view.frame.size;
     
     UIScrollView *scrollView = [[UIScrollView alloc]
@@ -37,13 +37,23 @@
     
     [self.view addSubview:scrollView];
     _mainScrollView = scrollView;
-    
-    NSLog(@"hello");
+}
+
+- (void)handleCustomViewPress:(CustomView *)customView {
+    NSLog(@"CustomView have been pressed: %@", customView);
 }
 
 - (void)handleAddPress:(id)sender {
-    SecondScreenViewController *vc = [[SecondScreenViewController alloc] initWithHandler:^void (UIImageView *imageView) {
+    BlockHandler onCustomViewPress = ^void(CustomView *customView) {
+        NSLog(@"CustomView have been pressed: %@", customView);
+    };
+    
+    SecondScreenViewController *vc = [[SecondScreenViewController alloc] initWithHandler:^void (CustomImage *imageView) {
         [self.mainScrollView addSubview:imageView];
+        
+        CustomView *customView = [[CustomView alloc] initWithImage:imageView.image];
+        [customView setHandler:onCustomViewPress];
+        
         [self.navigationController popViewControllerAnimated:YES];
     }];
     

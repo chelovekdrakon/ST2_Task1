@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "UILoader.h"
 
-NS_ASSUME_NONNULL_BEGIN
+#import "CustomImage.h"
+
 
 @interface SecondScreenViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
-- (id)initWithHandler:(void (^)(UIImageView *))onImagePress;
+- (id)initWithHandler:(void (^)(CustomImage *))onImagePress;
 @end
 
-NS_ASSUME_NONNULL_END

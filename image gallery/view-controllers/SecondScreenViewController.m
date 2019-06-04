@@ -8,9 +8,11 @@
 
 #import "SecondScreenViewController.h"
 
+typedef void (^completionHandler)(NSData *data, NSURLResponse *response, NSError *error);
+
 @interface SecondScreenViewController ()
-@property (nonatomic, copy) void (^onImagePress)(UIImageView *);
-@property(nonatomic, strong) NSURL *imageUrl;
+@property (nonatomic, copy) void (^onImagePress)(CustomImage *);
+@property(nonatomic, strong) NSURL *imageURL;
 @property(nonatomic, strong) UIActivityIndicatorView *loader;
 @property(nonatomic, assign) int imageHeight;
 @property(nonatomic, assign) int imagesAmount;
@@ -18,7 +20,7 @@
 
 @implementation SecondScreenViewController
 
-- (id)initWithHandler:(void (^)(UIImageView *))onImagePress {
+- (id)initWithHandler:(void (^)(CustomImage *))onImagePress {
     self = [super init];
     if (self) {
         _onImagePress = onImagePress;
@@ -56,7 +58,7 @@
     CGSize navBarSize = self.navigationController.navigationBar.frame.size;
     
     NSString *urlStr = [NSString stringWithFormat:@"https://picsum.photos/%i/%i", (int)controllerSize.width, _imageHeight];
-    _imageUrl = [NSURL URLWithString:urlStr];
+    _imageURL = [NSURL URLWithString:urlStr];
     
     self.mainScrollView.contentSize = CGSizeMake(
                                                  controllerSize.width,
@@ -73,24 +75,33 @@
 
 -(void)generateImages {
     for (int index = 0; index < _imagesAmount; index++) {
-        UIImageView *view = [self generateImageViewForIndex:index];
+        CustomImage *view = [self generateImageViewForIndex:index];
         [self.mainScrollView addSubview:view];
     }
 }
 
 - (void)handleImagePress:(id)sender {
-    self.onImagePress((UIImageView *)[sender view]);
+    self.onImagePress((CustomImage *)[sender view]);
 }
 
-- (UIImageView *)generateImageViewForIndex:(int)index {
-    NSData *imageData = [NSData dataWithContentsOfURL:_imageUrl];
+- (CustomImage *)generateImageViewForIndex:(int)index {
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:_imageURL cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:15.0];
+    [request setHTTPMethod:@"HEAD"];
+    NSURLResponse *response = nil;
+    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
+    NSURL *finalURL = response.URL;
+    
+    CustomImage *imageView = [[CustomImage alloc] initWithUrl:finalURL];
+    
+    NSData *imageData = [NSData dataWithContentsOfURL:finalURL];
     UIImage *image = [[UIImage alloc] initWithData:imageData];
-    UIImageView *imageView = [[UIImageView alloc]
-                              initWithFrame:CGRectMake(0, index * image.size.height, image.size.width, image.size.height)];
+
+    imageView.frame = CGRectMake(0, index * image.size.height, image.size.width, image.size.height);
     imageView.image = image;
+    imageView.imageDescription = [finalURL absoluteString];
     
     UILabel *label = [UILabel new];
-    label.text = [_imageUrl absoluteString];
+    label.text = [finalURL absoluteString];
     [label sizeToFit];
     label.frame = CGRectMake(
                              (image.size.width / 2) - (label.frame.size.width / 2),
