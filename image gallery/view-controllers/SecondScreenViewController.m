@@ -12,10 +12,14 @@ typedef void (^completionHandler)(NSData *data, NSURLResponse *response, NSError
 
 @interface SecondScreenViewController ()
 @property (nonatomic, copy) void (^onImagePress)(CustomImage *);
+
 @property(nonatomic, strong) NSURL *imageURL;
-@property(nonatomic, strong) UIActivityIndicatorView *loader;
+@property(nonatomic, weak) UIActivityIndicatorView *loader;
+
 @property(nonatomic, assign) int imageHeight;
 @property(nonatomic, assign) int imagesAmount;
+
+@property(nonatomic, strong) NSMutableArray <NSDictionary *> *imagesData;
 @end
 
 @implementation SecondScreenViewController
@@ -33,6 +37,7 @@ typedef void (^completionHandler)(NSData *data, NSURLResponse *response, NSError
     
     _imageHeight = 100;
     _imagesAmount = 30;
+    self.imagesData = [NSMutableArray array];
     self.navigationItem.title = @"Select Item";
     
     UIBarButtonItem *barButtonClose = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(handleClosePress:)];
@@ -60,20 +65,44 @@ typedef void (^completionHandler)(NSData *data, NSURLResponse *response, NSError
     self.mainScrollView.contentSize = CGSizeMake(controllerSize.width, (_imagesAmount * _imageHeight) + navBarSize.height);
     self.mainScrollView.userInteractionEnabled = YES;
     
-    [self  generateImages:^void (void) {
+    [self generateImages:^void (void) {
         [self.loader stopAnimating];
     }];
 }
 
 -(void)generateImages:(void (^)(void))completion {
-    dispatch_queue_t systemConcurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(systemConcurrentQueue, ^{
+    dispatch_group_t group = dispatch_group_create();
+    
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         for (int index = 0; index < self.imagesAmount; index++) {
-            CustomImage *view = [self generateImageViewForIndex:index];
-            [self.mainScrollView addSubview:view];
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:_imageURL cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:15.0];
+            [request setHTTPMethod:@"HEAD"];
+            NSURLResponse *response = nil;
+            [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
+            NSURL *finalURL = response.URL;
+            
+            NSData *imageData = [NSData dataWithContentsOfURL:finalURL];
+            
+            [self.imagesData addObject:@{
+                                         @"url":finalURL,
+                                         @"data":imageData
+                                         }];
+            
         }
-        
-        completion();
+    });
+    
+    dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            for (int index = 0; index < self.imagesData.count; index++) {
+                NSDictionary *data = self.imagesData[index];
+                CustomImage *view = [self generateImageViewForIndex:index
+                                        withURL:[data valueForKey:@"url"]
+                                            and:[data valueForKey:@"data"]];
+                [self.mainScrollView addSubview:view];
+            }
+            
+            completion();
+        });
     });
 }
 
@@ -81,16 +110,9 @@ typedef void (^completionHandler)(NSData *data, NSURLResponse *response, NSError
     self.onImagePress((CustomImage *)[sender view]);
 }
 
-- (CustomImage *)generateImageViewForIndex:(int)index {
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:_imageURL cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:15.0];
-    [request setHTTPMethod:@"HEAD"];
-    NSURLResponse *response = nil;
-    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
-    NSURL *finalURL = response.URL;
-    
+- (CustomImage *)generateImageViewForIndex:(int)index withURL:(NSURL *)finalURL and:(NSData *)imageData {
     CustomImage *imageView = [[CustomImage alloc] initWithUrl:finalURL];
     
-    NSData *imageData = [NSData dataWithContentsOfURL:finalURL];
     UIImage *image = [[UIImage alloc] initWithData:imageData];
 
     imageView.frame = CGRectMake(0, index * image.size.height, image.size.width, image.size.height);
