@@ -10,6 +10,7 @@
 
 typedef void (^completionHandler)(NSData *data, NSURLResponse *response, NSError *error);
 
+
 @interface SecondScreenViewController ()
 @property (nonatomic, copy) void (^onImagePress)(CustomImage *);
 
@@ -22,6 +23,7 @@ typedef void (^completionHandler)(NSData *data, NSURLResponse *response, NSError
 @property(nonatomic, strong) NSMutableArray <NSDictionary *> *imagesData;
 @end
 
+
 @implementation SecondScreenViewController
 
 - (id)initWithHandler:(void (^)(CustomImage *))onImagePress {
@@ -31,6 +33,8 @@ typedef void (^completionHandler)(NSData *data, NSURLResponse *response, NSError
     }
     return self;
 }
+
+#pragma mark - Lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -70,6 +74,8 @@ typedef void (^completionHandler)(NSData *data, NSURLResponse *response, NSError
     }];
 }
 
+#pragma mark - UI Generators
+
 -(void)generateImages:(void (^)(void))completion {
     dispatch_group_t group = dispatch_group_create();
     
@@ -106,15 +112,11 @@ typedef void (^completionHandler)(NSData *data, NSURLResponse *response, NSError
     });
 }
 
-- (void)handleImagePress:(id)sender {
-    self.onImagePress((CustomImage *)[sender view]);
-}
-
 - (CustomImage *)generateImageViewForIndex:(int)index withURL:(NSURL *)finalURL and:(NSData *)imageData {
     CustomImage *imageView = [[CustomImage alloc] initWithUrl:finalURL];
     
     UIImage *image = [[UIImage alloc] initWithData:imageData];
-
+    
     imageView.frame = CGRectMake(0, index * image.size.height, image.size.width, image.size.height);
     imageView.image = image;
     imageView.imageDescription = [finalURL absoluteString];
@@ -143,12 +145,20 @@ typedef void (^completionHandler)(NSData *data, NSURLResponse *response, NSError
     return imageView;
 }
 
-- (UIColor *)randomColor {
-    return [UIColor colorWithHue:drand48() saturation:1.0 brightness:1.0 alpha:1.0];
+#pragma mark - Handlers
+
+- (void)handleImagePress:(id)sender {
+    self.onImagePress((CustomImage *)[sender view]);
 }
 
 - (void)handleClosePress:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - Utils
+
+- (UIColor *)randomColor {
+    return [UIColor colorWithHue:drand48() saturation:1.0 brightness:1.0 alpha:1.0];
 }
 
 @end

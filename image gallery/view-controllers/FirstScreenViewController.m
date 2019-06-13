@@ -14,6 +14,8 @@
 
 @implementation FirstScreenViewController
 
+#pragma mark - Lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -43,7 +45,7 @@
     _mainScrollView = scrollView;
 }
 
-#pragma - handlers
+#pragma mark - Handlers
 
 - (void)handleScrollViewPress:(id)sender {
     self.navigationItem.title = @"Image Gallery";
