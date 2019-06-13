@@ -43,16 +43,13 @@ typedef void (^completionHandler)(NSData *data, NSURLResponse *response, NSError
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-//    UILoader *loader = [[UILoader alloc] initWithHandlerBlock:^void () {
-//        [self generateImages];
-//        [self.loader stopAnimating];
-//    }];
-//    loader.color = [UIColor grayColor];
-//    loader.center = self.view.center;
-//    _loader = loader;
-//    [loader startAnimating];
-//
-//    [self.view addSubview:loader];
+    UIActivityIndicatorView *loader = [[UIActivityIndicatorView alloc] init];
+    loader.color = [UIColor grayColor];
+    loader.center = self.view.center;
+    _loader = loader;
+    [loader startAnimating];
+
+    [self.view addSubview:loader];
     
     CGSize controllerSize = self.view.frame.size;
     CGSize navBarSize = self.navigationController.navigationBar.frame.size;
@@ -63,18 +60,21 @@ typedef void (^completionHandler)(NSData *data, NSURLResponse *response, NSError
     self.mainScrollView.contentSize = CGSizeMake(controllerSize.width, (_imagesAmount * _imageHeight) + navBarSize.height);
     self.mainScrollView.userInteractionEnabled = YES;
     
-    [self generateImages];
+    [self  generateImages:^void (void) {
+        [self.loader stopAnimating];
+    }];
 }
 
-- (void)viewDidLayoutSubviews {
-    
-}
-
--(void)generateImages {
-    for (int index = 0; index < _imagesAmount; index++) {
-        CustomImage *view = [self generateImageViewForIndex:index];
-        [self.mainScrollView addSubview:view];
-    }
+-(void)generateImages:(void (^)(void))completion {
+    dispatch_queue_t systemConcurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(systemConcurrentQueue, ^{
+        for (int index = 0; index < self.imagesAmount; index++) {
+            CustomImage *view = [self generateImageViewForIndex:index];
+            [self.mainScrollView addSubview:view];
+        }
+        
+        completion();
+    });
 }
 
 - (void)handleImagePress:(id)sender {

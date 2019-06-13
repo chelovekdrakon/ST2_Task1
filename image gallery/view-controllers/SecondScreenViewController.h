@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UILoader.h"
 
 #import "CustomImage.h"
 

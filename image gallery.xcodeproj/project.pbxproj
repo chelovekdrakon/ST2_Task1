@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3206CC4B22A44E5F00BB66D1 /* UILoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3206CC4A22A44E5F00BB66D1 /* UILoader.m */; };
 		321446BE22A515ED0024B78D /* SecondScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 321446BC22A515ED0024B78D /* SecondScreenViewController.m */; };
 		321446BF22A515ED0024B78D /* SecondScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 321446BD22A515ED0024B78D /* SecondScreenViewController.xib */; };
 		322134FB22A6A9AE00BB9915 /* CustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 322134FA22A6A9AE00BB9915 /* CustomView.m */; };
@@ -20,8 +19,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3206CC4922A44E5F00BB66D1 /* UILoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UILoader.h; sourceTree = "<group>"; };
-		3206CC4A22A44E5F00BB66D1 /* UILoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UILoader.m; sourceTree = "<group>"; };
 		321446BB22A515ED0024B78D /* SecondScreenViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondScreenViewController.h; sourceTree = "<group>"; };
 		321446BC22A515ED0024B78D /* SecondScreenViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondScreenViewController.m; sourceTree = "<group>"; };
 		321446BD22A515ED0024B78D /* SecondScreenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondScreenViewController.xib; sourceTree = "<group>"; };
@@ -59,8 +56,6 @@
 				322134FA22A6A9AE00BB9915 /* CustomView.m */,
 				322134FC22A6BB1800BB9915 /* CustomImage.h */,
 				322134FD22A6BB1800BB9915 /* CustomImage.m */,
-				3206CC4922A44E5F00BB66D1 /* UILoader.h */,
-				3206CC4A22A44E5F00BB66D1 /* UILoader.m */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -178,7 +173,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3206CC4B22A44E5F00BB66D1 /* UILoader.m in Sources */,
 				32EFD71322A2D2B9008D7801 /* FirstScreenViewController.m in Sources */,
 				32EFD71E22A2D2BA008D7801 /* main.m in Sources */,
 				32EFD73122A2DFDA008D7801 /* MainNavigationController.m in Sources */,
