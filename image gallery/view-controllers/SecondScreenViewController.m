@@ -81,7 +81,7 @@ typedef void (^completionHandler)(NSData *data, NSURLResponse *response, NSError
     
     dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         for (int index = 0; index < self.imagesAmount; index++) {
-            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:_imageURL cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:15.0];
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.imageURL cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:15.0];
             [request setHTTPMethod:@"HEAD"];
             NSURLResponse *response = nil;
             [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
